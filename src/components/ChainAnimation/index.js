@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { render } from 'react-dom'
 import { useTransition, useSpring, useChain, config } from 'react-spring'
 import { Global, Container, Item } from './styles'
 import data from './data'

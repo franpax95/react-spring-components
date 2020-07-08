@@ -28,9 +28,9 @@ function GestureSlider({
             className="GestureSlider"
             style={{ width, height, backgroundColor, border }}
         >
-            <animated.div {...bind()} class="item" style={{ background: bg }}>
-                <animated.div class="av" style={{ transform: avSize, justifySelf: delta[0] < 0 ? 'end' : 'start' }} />
-                <animated.div class="fg" style={{ transform: interpolate([x, size], (x, s) => `translate3d(${x}px,0,0) scale(${s})`) }}>
+            <animated.div {...bind()} className="item" style={{ background: bg }}>
+                <animated.div className="av" style={{ transform: avSize, justifySelf: delta[0] < 0 ? 'end' : 'start' }} />
+                <animated.div className="fg" style={{ transform: interpolate([x, size], (x, s) => `translate3d(${x}px,0,0) scale(${s})`) }}>
                     {children}
                 </animated.div>
             </animated.div>

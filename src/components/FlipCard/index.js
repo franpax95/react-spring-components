@@ -1,49 +1,62 @@
-import React, { useState } from 'react'
-import { useSpring, animated as a } from 'react-spring'
-import './styles.css'
+import React, { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
+import './styles.css';
 
-const FlipCard = ({ 
-    width = '500px', 
-    height = '500px',
-    backgroundImageFront = 'https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop',
-    backgroundImageBack = 'https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&w=1181&q=80&auto=format&fit=crop'
+const FlipCard = ({
+    width = '400px',
+    height = '400px',
+    front = <></>,
+    back = <></>
 }) => {
-    
-    const [flipped, set] = useState(false)
-    const { transform, opacity } = useSpring({
-        opacity: flipped ? 1 : 0,
-        transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
-        config: { mass: 5, tension: 500, friction: 80 }
+    const [ selected, setSelected] = useState(false);
+    const { opacity, transform } = useSpring({
+        opacity: selected ? 1 : 0,
+        transform: `rotateY(${selected ? 180 : 0}deg)`,
+        config: {
+            friction: 22,
+            tension: 500
+        }
     });
+    const [props, set] = useSpring(() => ({ state: [0, 0, 1] }));
+    const inverseOpacity = o => 1 - o;
+    const inverseTransform = t => `${t} rotateY(180deg)`;
+    const transformCard = (x, y, scale) => `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg) scale(${scale})`;
 
     return (
-        <div 
-            onClick={() => set(state => !state)}
-            className="FlipCard"
-            style={{ width, height }}
+        <animated.div 
+            className="FlipCard" 
+            style={{ 
+                width, 
+                height,
+                transform: !selected && props.state.interpolate(transformCard)
+            }} 
+            onClick={() => setSelected(!selected)}
         >
-            <a.div 
-                className="c back" 
+
+            <animated.div 
+                className="front"
                 style={{ 
-                    opacity: opacity.interpolate(o => 1 - o),
+                    opacity: opacity.interpolate(inverseOpacity), 
                     transform,
-                    maxWidth: width,
-                    maxHeight: height,
-                    backgroundImage: `url(${backgroundImageFront})`
-                }} 
-            />
-            <a.div
-                className="c front" 
+                    zIndex: selected ? 1 : 10
+                }}
+            >
+                {front}
+            </animated.div>
+
+            <animated.div 
+                className="back" 
                 style={{ 
                     opacity, 
-                    transform: transform.interpolate(t => `${t} rotateX(180deg)`),
-                    maxWidth: width,
-                    maxHeight: height,
-                    backgroundImage: `url(${backgroundImageBack})`
-                }} 
-            />
-        </div>
-    );
+                    transform: transform.interpolate(inverseTransform),
+                    zIndex: selected ? 10 : 1
+                }}
+            >
+                {back}
+            </animated.div>
+
+        </animated.div>
+    )
 }
 
 export default FlipCard;

@@ -1,19 +1,23 @@
-.FlipCard {
+.FlipCard{
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 2;
+
+    filter: drop-shadow(0 3px 6px
+	 rgba(0, 0, 0, 0.16))
+	 drop-shadow(0 3px 6px
+	 rgba(0, 0, 0, 0.1));
+	transition: filter 0.5s;
 }
 
-.FlipCard .c {
+.FlipCard:hover {
+	filter: drop-shadow(0 14px 28px
+        rgba(0, 0, 0, 0.25))
+        drop-shadow(0 10px 10px
+        rgba(0, 0, 0, 0.1));
+}
+
+.FlipCard > div{
     position: absolute;
     width: 100%;
     height: 100%;
-    cursor: pointer;
-    will-change: transform, opacity;
-}
-
-.FlipCard .front,
-.FlipCard .back {
-    background-size: cover;
 }
