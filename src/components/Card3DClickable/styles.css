@@ -35,7 +35,7 @@ body {
     justify-content: center;
     overflow: hidden;
     /* background: #f0f0f0; */
-    background-color: violet;
+    background-color: lightgray;
 }
 
 .Card3DClickable .card{
