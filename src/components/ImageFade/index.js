@@ -26,7 +26,7 @@ const ImageFade = ({
         config: config.molasses,
     });
 
-    useEffect(() => void setInterval(() => set(state => (state + 1) % 4), (timeInterval * 1000)), []);
+    useEffect(() => void setInterval(() => set(state => (state + 1) % slides.length), (timeInterval * 1000)), []);
 
     return (
         <div 

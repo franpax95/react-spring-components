@@ -14,6 +14,7 @@ import FlipImageCard from './FlipImageCard';
 import GestureSlider from './GestureSlider';
 
 import ImageFade from './ImageFade';
+import ImageDragSlider from './ImageDragSlider'
 
 import SimpleSlide from './SimpleSlide';
 import SimpleSlideImages from './SimpleSlideImages';
@@ -49,6 +50,16 @@ const back = () => (
         }}
     >Back</div>
 );
+
+const imagesDragGallery = [
+    '/img/DragGallery/diploma-ecmascript-6.jpg',
+    '/img/DragGallery/diploma-asincronismo-js.jpg',
+    '/img/DragGallery/diploma-react.jpg',
+    '/img/DragGallery/diploma-react-avanzado.jpg',
+    '/img/DragGallery/diploma-react-router.jpg',
+    '/img/DragGallery/diploma-redux.jpg',
+    '/img/DragGallery/diploma-webpack.jpg',
+];
 
 const App = () => {
     const ref = useRef();
@@ -124,6 +135,9 @@ const App = () => {
                     { id: 4, url: '/img/ImageFade/img4.jpg' }
                 ]}
             /> */}
+
+
+            <ImageDragSlider items={imagesDragGallery} width={700} visible={3}
 
 
 
